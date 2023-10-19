@@ -28,15 +28,19 @@ class PetrolEngine(Engine):
 class Car:
     def __init__(self, model: str, engine: Engine, horsepower: int=None):
         self.model = model
-        self.engine = engine
+        self._engine = engine
         self.hp = horsepower
-        if isinstance(self.engine, DiezelEngine):
+        if isinstance(engine, DiezelEngine):
             self.eng_type = 'дизельный'
-        elif isinstance(self.engine, PetrolEngine):
+        elif isinstance(engine, PetrolEngine):
             self.eng_type = 'бензиновый'
 
     def __str__(self):
         return f"{self.model} тип двигателя: {self.eng_type} HP: {self.hp}"
+    
+    @property
+    def engine(self):
+        return self._engine
     
 
 if __name__ == '__main__':
